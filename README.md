@@ -4,7 +4,7 @@ A GitHub action to call au3pm on your project
 ## Usage
 
 ```yaml
-- uses: au3pm/au3pm-action@v2
+- uses: au3pm/au3pm-action@v1.1.1
   with:
     # The verion of au3pm to use.
     # Defaults to latest

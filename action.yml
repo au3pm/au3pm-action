@@ -29,7 +29,8 @@ runs:
       run: |
         IFS=$'\n'
         for cmd in $(echo "${{ inputs.commands }}" | tr ',' '\n'); do
-          ./au3pm.exe $cmd
+          # Use 'eval' to correctly handle multiple arguments
+          eval ./au3pm.exe $cmd
           if [ $? -ne 0 ]; then
             exit 1
           fi

@@ -21,8 +21,8 @@ runs:
         repository: 'genius257/au3pm'
         fileName: 'au3pm.exe'
         preRelease: true
-        latest: ${{ inputs.au3pm_version = 'latest' && 'true' || 'false' }}
-        tag: ${{ inputs.au3pm_version = 'latest' && inputs.au3pm_version || '' }}
+        latest: ${{ inputs.au3pm_version == 'latest' && 'true' || 'false' }}
+        tag: ${{ inputs.au3pm_version == 'latest' && inputs.au3pm_version || '' }}
 
     - name: Run commands
       shell: bash

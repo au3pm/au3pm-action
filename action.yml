@@ -1,0 +1,40 @@
+name: au3pm
+description: 'Use the au3pm CLI in your Github Actions.'
+
+inputs:
+  au3pm_version:
+    description: "What version of au3pm to use"
+    default: 'latest'
+    required: false
+
+  commands:
+    description: 'List of commands to run with the package manager'
+    required: true
+    default: 'install'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download au3pm
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: 'genius257/au3pm'
+        fileName: 'au3pm.exe'
+        preRelease: true
+        latest: ${{ inputs.au3pm_version = 'latest' && 'true' || 'false' }}
+        tag: ${{ inputs.au3pm_version = 'latest' && inputs.au3pm_version || '' }}
+
+    - name: Run commands
+      shell: bash
+      run: |
+        IFS=$'\n'
+        for cmd in $(echo "${{ inputs.commands }}" | tr ',' '\n'); do
+          ./package-manager $cmd
+          if [ $? -ne 0 ]; then
+            exit 1
+          fi
+        done
+
+branding:
+  icon: 'package'
+  color: 'blue'

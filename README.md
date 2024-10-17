@@ -17,7 +17,7 @@ A GitHub action to call au3pm on your project
 
 The `commands` argument can have multiple commands:
 
-```
+```yaml
 commands: |
   install
   rebuild
